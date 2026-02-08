@@ -3,9 +3,8 @@ import React, { createContext, useEffect, useState } from "react";
 export const ContextStore = createContext();
 
 export default function StoreProvider({ children }) {
-    let [events, setEvents] = useState(localStorage.getItem("events")||[]);
+    let [events, setEvents] = useState(JSON.parse(localStorage.getItem("events"))||[]);
     const addEvent = (event) => setEvents([...events, event]);
-
     useEffect(()=>{
         localStorage.setItem("events", JSON.stringify(events))
     },[events])

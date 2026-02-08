@@ -5,10 +5,12 @@ import Footer from "./components/Footer/Footer"
 import AddForm from './components/AddForm/AddForm'
 import { FaRegCalendarPlus } from "react-icons/fa";
 import StorageProvider from "./store/ContextStore"
+import { BrowserRouter} from "react-router-dom"
 
 export default function App() {
   let [modalIsOpen, setModalIsOpen] = useState(false)
   return (
+    <BrowserRouter>
     <StorageProvider>
       <Header/>
       <Main/>
@@ -18,5 +20,6 @@ export default function App() {
         <FaRegCalendarPlus />
       </button>
     </StorageProvider>
+    </BrowserRouter>
   )
 }

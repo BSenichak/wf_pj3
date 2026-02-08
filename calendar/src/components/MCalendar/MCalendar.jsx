@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import style from "./MCalendar.module.scss"
 import { getCalendarDates } from '../../utils/calendar';
+import { ContextStore } from "../../store/ContextStore"
+
 
 
 export default function MCalendar(props) {
@@ -9,7 +11,9 @@ export default function MCalendar(props) {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const dates = getCalendarDates(year, month)
-    console.log(dates)
+
+    let {events} = useContext(ContextStore)
+    console.log(events)
 
   return (
     <div className={style.wrapper}>
@@ -26,7 +30,35 @@ export default function MCalendar(props) {
                         <th>НД</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    {
+                        Array.from({length: Math.ceil(dates.length / 7)}, (_, weekIndex)=>(
+                            <tr key={weekIndex}>
+                                {dates.slice(weekIndex * 7, (weekIndex * 7) + 7)
+                                .map((date, index)=>(
+                                    <td key={index}>
+                                        <span className={style.number}>
+                                            {date.getUTCDate()}
+                                        </span>
+                                        {
+                                            events.filter((e, i) => e.date == date.toISOString().split("T")[0])
+                                            .map((e, i)=>(
+                                                <button key={i} className={style.event}
+                                                style={{
+                                                    backgroundColor: e.color
+                                                }}
+                                                >
+                                                    {e.title}
+                                                </button>
+                                            ))
+                                        }
+                                    </td>
+                                ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </tbody>
             </table>
         </div>
     </div>

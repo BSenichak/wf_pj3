@@ -4,6 +4,7 @@ import style from "./header.module.scss"
 import { IoCalendar } from "react-icons/io5";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaCalendarDay } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 
 function Header(props) {
@@ -14,10 +15,10 @@ function Header(props) {
             <h3>RoboCalendar</h3>
         </div>
         <nav>
-            <a href="" className={style.link}>Main</a>
-            <a href="" className={style.link}><IoCalendar />Month</a>
-            <a href="" className={style.link}><FaCalendarAlt/>Week</a>
-            <a href="" className={style.link}><FaCalendarDay/>Day</a>
+            <NavLink to="/" className={style.link}>Main</NavLink>
+            <NavLink to="/" className={style.link}><IoCalendar />Month</NavLink>
+            <NavLink to="/week" className={style.link}><FaCalendarAlt/>Week</NavLink>
+            <NavLink to="/day" className={style.link}><FaCalendarDay/>Day</NavLink>
 
         </nav>
     </header>

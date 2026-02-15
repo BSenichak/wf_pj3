@@ -1,0 +1,77 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.valentinka {
+    margin-top: 20px;
+    padding: 25px;
+    width: 320px;
+
+    background: linear-gradient(145deg, #ffe6f2, #ffb6d9);
+    border-radius: 20px;
+
+    box-shadow: 0 10px 20px rgba(255, 100, 160, 0.3),
+                inset 0 0 15px rgba(255, 255, 255, 0.4);
+
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.valentinka:hover {
+    transform: scale(1.03);
+}
+
+.valentinka h1 {
+    color: #d9047f;
+    font-size: 28px;
+    margin: 0 0 10px;
+    text-shadow: 0 2px 4px rgba(255, 0, 100, 0.3);
+}
+
+.valentinka p {
+    color: #7a003c;
+    font-size: 18px;
+    white-space: pre-wrap;
+}
+
+.valentinka p:last-child {
+    font-size: 28px;
+    margin-top: 15px;
+    animation: floatHearts 2s infinite ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatHearts {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* Optional: style inputs to match theme */
+input, textarea {
+    margin-top: 5px;
+    padding: 10px;
+    width: 250px;
+
+    border: 2px solid #ff91c8;
+    border-radius: 10px;
+
+    outline: none;
+    font-size: 16px;
+
+    background: #fff4fb;
+    transition: 0.2s;
+}
+
+input:focus, textarea:focus {
+    border-color: #d9047f;
+    box-shadow: 0 0 10px rgba(255, 0, 130, 0.3);
+}

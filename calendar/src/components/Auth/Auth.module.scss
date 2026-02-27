@@ -1,0 +1,15 @@
+.wrapper {
+    display: grid;
+    place-items: center;
+    min-height: 90vh;
+    & > form {
+        display: flex;
+        flex-direction: column;
+        & > button {
+            background-color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+    }
+}

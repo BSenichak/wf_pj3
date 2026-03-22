@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Auth.module.scss";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../store/AuthReducer";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
     const {
@@ -10,9 +13,22 @@ export default function Register() {
         watch,
     } = useForm();
 
+    const { loading, error, token } = useSelector((state) => state.auth);
+    let dispatch = useDispatch()
+
+    let navigate = useNavigate()
+    useEffect(()=>{
+        if(error){
+            alert(error)
+        }
+        if(token){
+            navigate("/")
+        }
+    }, [token, error])
+
     return (
         <div className={style.wrapper}>
-            <form onSubmit={handleSubmit((data)=>console.log(data))}>
+            <form onSubmit={handleSubmit((data) => dispatch(registerUser(data)))}>
                 <h1>Register</h1>
                 <label htmlFor="login">Login</label>
                 <input
@@ -84,15 +100,18 @@ export default function Register() {
                 <br />
 
                 <label htmlFor="confirmPassword">Confirm password</label>
-                <input type="text" id="confirmPassword" 
-                {...register("confirmPassword", {
-                    required: true,
-                    validate: (value)=> {
-                        if( value !== watch("password")){
-                            return "Passwords do not match"
-                        }
-                    }
-                })}/>
+                <input
+                    type="text"
+                    id="confirmPassword"
+                    {...register("confirmPassword", {
+                        required: true,
+                        validate: (value) => {
+                            if (value !== watch("password")) {
+                                return "Passwords do not match";
+                            }
+                        },
+                    })}
+                />
                 <span>{errors.confirmPassword?.message}</span>
                 <br />
 

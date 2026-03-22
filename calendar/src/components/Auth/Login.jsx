@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Auth.module.scss";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux"
+import { loginUser } from "../../store/AuthReducer";
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
+    let dispatch = useDispatch()
+    let { loading, token, error } = useSelector(state=> state.auth)
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         watch,
     } = useForm();
+    let navigate = useNavigate()
+
+    useEffect(()=>{
+        if(error){
+            alert(error)
+        }
+        if(token){
+            navigate("/")
+        }
+    }, [token, error])
 
     return (
         <div className={style.wrapper}>
-            <form onSubmit={handleSubmit((data)=>console.log(data))}>
+            <form onSubmit={handleSubmit((data)=>dispatch(loginUser(data)))}>
                 <h1>Login</h1>
                 <label htmlFor="email">Email</label>
                 <input
